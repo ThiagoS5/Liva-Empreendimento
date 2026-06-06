@@ -31,7 +31,7 @@ export default function Home() {
     <main>
       <Carousel
         id="home"
-        className="h-svh"
+        className="h-[clamp(424px,118vw,560px)] max-h-[calc(100svh-84px)] sm:h-[clamp(560px,52.15vw,751px)] sm:max-h-none"
         plugins={[
           Autoplay({
             delay: 4000,
@@ -40,10 +40,10 @@ export default function Home() {
           Fade({}),
         ]}
       >
-        <CarouselContent>
+        <CarouselContent className="h-full">
           {heroImages.map((image, index) => (
-            <CarouselItem key={index}>
-              <div className="relative aspect-video items-center justify-center overflow-hidden h-screen w-full">
+            <CarouselItem key={index} className="h-full">
+              <div className="relative h-full w-full overflow-hidden">
                 <Image
                   alt={image.alt}
                   src={image.src}
@@ -57,22 +57,26 @@ export default function Home() {
         </CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
-        <div className="pointer-events-none absolute inset-0 flex flex-col items-start justify-center p-8 text-left text-white md:p-16">
-          <p className="text-sm font-bold uppercase tracking-widest">
-            Pré lançamento
-          </p>
+        <div className="pointer-events-none absolute inset-0 flex items-start pt-[72px] text-left text-white sm:items-center sm:pt-0">
+          <div className="w-full px-[25px] sm:px-[16.3vw]">
+            <p className="text-sm font-bold uppercase tracking-widest">
+              Pré lançamento
+            </p>
 
-          <h1 className="mt-2 text-5xl font-bold md:text-7xl">Barra View</h1>
+            <h1 className="mt-3 text-[2.375rem] font-bold leading-none sm:text-[5rem]">
+              Barra View
+            </h1>
 
-          <div className="mt-4 rounded-md bg-[var(--badge)] px-3 py-1 text-black">
-            Apartamento com 3 dormitórios, sendo 1 suíte
+            <div className="mt-4 flex w-fit max-w-full rounded-md bg-[var(--badge)] px-2 py-1.5 text-sm leading-none text-black sm:px-3 sm:text-xl">
+              Apartamento com 3 dormitórios, sendo 1 suíte
+            </div>
+            <Button
+              className="pointer-events-auto mt-12 h-11 w-32 border-2 sm:h-[47px] sm:w-[174px]"
+              variant="outline"
+            >
+              Saiba mais
+            </Button>
           </div>
-          <Button
-            className="pointer-events-auto mt-6 border-2"
-            variant="outline"
-          >
-            Saiba mais
-          </Button>
         </div>
       </Carousel>
       <div className="px-4 sm:px-6 lg:px-8">

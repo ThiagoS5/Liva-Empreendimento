@@ -1,19 +1,14 @@
 'use client'
 
 import { Button } from '@/components/atom/button'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/atom/select'
 import { ExpansiveCard } from '@/components/molecules/ExpansiveCard'
 import allPropertiesData from '@/data/properties.json'
-import { SlidersHorizontal, X } from 'lucide-react'
+import { ChevronDown, SlidersHorizontal, X } from 'lucide-react'
 import { useState } from 'react'
 
 const allProperties = allPropertiesData
+const filterSelectClassName =
+  'h-12 w-full appearance-none rounded-md border-2 border-black bg-white px-5 py-3 pr-11 text-base font-medium text-black shadow-sm transition-all duration-200 hover:border-teal-600 hover:shadow-md focus:border-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-700/30 focus:ring-offset-2'
 
 export function PropertyListing() {
   const [showFilters, setShowFilters] = useState(false)
@@ -73,46 +68,68 @@ export function PropertyListing() {
             className="w-full max-w-3xl rounded-lg border border-black/10 bg-white p-4 text-left shadow-lg md:p-6"
           >
             <div className="grid gap-4 md:grid-cols-3">
-              <Select value={stageFilter} onValueChange={handleStageChange}>
-                <SelectTrigger aria-label="Estágio do empreendimento">
-                  <SelectValue placeholder="Estágio do empreendimento" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todos os Estágios</SelectItem>
-                  <SelectItem value="PRÉ LANÇAMENTO">Pré Lançamento</SelectItem>
-                  <SelectItem value="EM OBRAS">Em Obras</SelectItem>
-                  <SelectItem value="PRONTO PARA MORAR">
-                    Pronto para Morar
-                  </SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="relative">
+                <label className="sr-only" htmlFor="stage-filter">
+                  Estágio do empreendimento
+                </label>
+                <select
+                  id="stage-filter"
+                  value={stageFilter}
+                  onChange={(event) => handleStageChange(event.target.value)}
+                  className={filterSelectClassName}
+                >
+                  <option value="all">Todos os Estágios</option>
+                  <option value="PRÉ LANÇAMENTO">Pré Lançamento</option>
+                  <option value="EM OBRAS">Em Obras</option>
+                  <option value="PRONTO PARA MORAR">Pronto para Morar</option>
+                </select>
+                <ChevronDown
+                  className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-black/70"
+                  aria-hidden="true"
+                />
+              </div>
 
-              <Select
-                value={locationFilter}
-                onValueChange={handleLocationChange}
-              >
-                <SelectTrigger aria-label="Localização">
-                  <SelectValue placeholder="Localização" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todas as Cidades</SelectItem>
-                  <SelectItem value="Ribeirão Preto">Ribeirão Preto</SelectItem>
-                  <SelectItem value="Franca">Franca</SelectItem>
-                  <SelectItem value="Campinas">Campinas</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="relative">
+                <label className="sr-only" htmlFor="location-filter">
+                  Localização
+                </label>
+                <select
+                  id="location-filter"
+                  value={locationFilter}
+                  onChange={(event) => handleLocationChange(event.target.value)}
+                  className={filterSelectClassName}
+                >
+                  <option value="all">Todas as Cidades</option>
+                  <option value="Ribeirão Preto">Ribeirão Preto</option>
+                  <option value="Franca">Franca</option>
+                  <option value="Campinas">Campinas</option>
+                </select>
+                <ChevronDown
+                  className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-black/70"
+                  aria-hidden="true"
+                />
+              </div>
 
-              <Select value={typeFilter} onValueChange={handleTypeChange}>
-                <SelectTrigger aria-label="Tipo de imóvel">
-                  <SelectValue placeholder="Tipo de imóvel" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todos os Tipos</SelectItem>
-                  <SelectItem value="Apartamento">Apartamento</SelectItem>
-                  <SelectItem value="Casa">Casa</SelectItem>
-                  <SelectItem value="Terreno">Terreno</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="relative">
+                <label className="sr-only" htmlFor="type-filter">
+                  Tipo de imóvel
+                </label>
+                <select
+                  id="type-filter"
+                  value={typeFilter}
+                  onChange={(event) => handleTypeChange(event.target.value)}
+                  className={filterSelectClassName}
+                >
+                  <option value="all">Todos os Tipos</option>
+                  <option value="Apartamento">Apartamento</option>
+                  <option value="Casa">Casa</option>
+                  <option value="Terreno">Terreno</option>
+                </select>
+                <ChevronDown
+                  className="pointer-events-none absolute right-4 top-1/2 size-4 -translate-y-1/2 text-black/70"
+                  aria-hidden="true"
+                />
+              </div>
             </div>
           </div>
         )}
