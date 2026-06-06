@@ -1,5 +1,7 @@
 import { Footer } from '@/components/organisms/Footer'
 import { Header } from '@/components/organisms/Header'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import type { Metadata, Viewport } from 'next'
 import { Urbanist } from 'next/font/google'
 import './globals.css'
@@ -35,6 +37,8 @@ export default function RootLayout({
         <Header />
         <div className="flex-grow">{children}</div>
         <Footer />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
