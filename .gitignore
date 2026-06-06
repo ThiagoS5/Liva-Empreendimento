@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+/test-results/
+/playwright-report/
 
 # next.js
 /.next/
@@ -19,6 +21,10 @@
 
 # production
 /build
+
+# tooling caches
+/.swc/
+/.playwright-mcp/
 
 # misc
 .DS_Store
@@ -37,6 +43,7 @@ yarn-error.log*
 .vercel
 
 # local agent skills
+.agents/
 skills-lock.json
 
 # typescript
