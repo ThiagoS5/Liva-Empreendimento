@@ -11,7 +11,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
       <textarea
         className={cn(
           //* !Mobile! */
-          'min-h-32 w-64 px-3 py-2 md:w-96',
+          'min-h-32 w-full px-3 py-2',
           // ?--- APARÊNCIA BASE ---
           'rounded border-2 border-black bg-background text-sm text-black',
           'placeholder:text-muted-foreground',

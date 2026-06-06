@@ -12,87 +12,9 @@ import { ContactForm } from '@/components/organisms/ContactForm'
 import Autoplay from 'embla-carousel-autoplay'
 import Fade from 'embla-carousel-fade'
 import Image from 'next/image'
-import { useState } from 'react'
 import { PropertyListing } from '../components/organisms/PropertyListing'
 
 export default function Home() {
-  const [showMore] = useState(false)
-
-  const cards = [
-    {
-      imageUrl: '/image-1.png',
-      tag: 'Lançamento',
-      title: 'Edifício Lumière',
-      city: 'Franca',
-      neighborhood: 'Centro',
-      description: '3 suítes | 2 vagas',
-      features: '150m² de área privativa',
-    },
-    {
-      imageUrl: '/image-2.png',
-      tag: 'Lançamento',
-      title: 'Parque das Orquídeas',
-      city: 'Ribeirão Preto',
-      neighborhood: 'Jardim Botânico',
-      description: '4 suítes | 3 vagas',
-      features: '250m² de área privativa',
-    },
-    {
-      imageUrl: '/image-3.png',
-      tag: 'Breve Lançamento',
-      title: 'Residencial das Palmeiras',
-      city: 'Campinas',
-      neighborhood: 'Alphaville',
-      description: '3 suítes | 2 vagas',
-      features: '180m² de área privativa',
-    },
-    {
-      imageUrl: '/image-1.png',
-      tag: 'Lançamento',
-      title: 'Edifício Lumière',
-      city: 'Franca',
-      neighborhood: 'Centro',
-      description: '3 suítes | 2 vagas',
-      features: '150m² de área privativa',
-    },
-    {
-      imageUrl: '/image-2.png',
-      tag: 'Lançamento',
-      title: 'Parque das Orquídeas',
-      city: 'Ribeirão Preto',
-      neighborhood: 'Jardim Botânico',
-      description: '4 suítes | 3 vagas',
-      features: '250m² de área privativa',
-    },
-    {
-      imageUrl: '/image-3.png',
-      tag: 'Breve Lançamento',
-      title: 'Residencial das Palmeiras',
-      city: 'Campinas',
-      neighborhood: 'Alphaville',
-      description: '3 suítes | 2 vagas',
-      features: '180m² de área privativa',
-    },
-    {
-      imageUrl: '/image-1.png',
-      tag: 'Lançamento',
-      title: 'Edifício Lumière',
-      city: 'Franca',
-      neighborhood: 'Centro',
-      description: '3 suítes | 2 vagas',
-      features: '150m² de área privativa',
-    },
-    {
-      imageUrl: '/image-2.png',
-      tag: 'Lançamento',
-      title: 'Parque das Orquídeas',
-      city: 'Ribeirão Preto',
-      neighborhood: 'Jardim Botânico',
-      description: '4 suítes | 3 vagas',
-      features: '250m² de área privativa',
-    },
-  ]
-
   const heroImages = [
     {
       src: '/image-1.png',

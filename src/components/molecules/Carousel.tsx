@@ -98,15 +98,19 @@ function Carousel({
 
   React.useEffect(() => {
     if (!api) return
-    setSlidesCount(api.scrollSnapList().length)
-    onSelect(api)
-    api.on('reInit', () => {
+
+    const onReInit = () => {
       setSlidesCount(api.scrollSnapList().length)
       onSelect(api)
-    })
+    }
+
+    setSlidesCount(api.scrollSnapList().length)
+    onSelect(api)
+    api.on('reInit', onReInit)
     api.on('select', onSelect)
 
     return () => {
+      api?.off('reInit', onReInit)
       api?.off('select', onSelect)
     }
   }, [api, onSelect])
@@ -138,7 +142,7 @@ function Carousel({
       >
         {children}
         <span className="sr-only" aria-live="polite">
-          Slide {selectedIndex + 1} of {slidesCount}
+          Slide {selectedIndex + 1} de {slidesCount}
         </span>
       </div>
     </CarouselContext.Provider>
@@ -207,7 +211,7 @@ function CarouselPrevious({
       {...props}
     >
       <ArrowLeft />
-      <span className="sr-only">Previous slide</span>
+      <span className="sr-only">Slide anterior</span>
     </Button>
   )
 }
@@ -236,7 +240,7 @@ function CarouselNext({
       {...props}
     >
       <ArrowRight />
-      <span className="sr-only">Next slide</span>
+      <span className="sr-only">Próximo slide</span>
     </Button>
   )
 }

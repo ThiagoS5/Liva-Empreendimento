@@ -10,7 +10,7 @@ function Input({ className, type, ...props }: InputProps) {
       data-slot="input"
       className={cn(
         //* !Mobile! */
-        'h-12 w-64 md:w-96 px-3 py-1',
+        'h-12 w-full px-3 py-1',
         // ?--- APARÊNCIA BASE ---
         'rounded border-2 bg-transparent text-black',
         'placeholder:text-muted-foreground border-black border-2',

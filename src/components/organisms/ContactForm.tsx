@@ -11,7 +11,7 @@ import {
 import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { isValidPhoneNumber } from 'libphonenumber-js'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm, type FieldErrors } from 'react-hook-form'
 import { z } from 'zod'
 import { FloatingLabelInput } from '../molecules/FloatingLabelInput'
@@ -34,10 +34,20 @@ const formSchema = z.object({
 
 type FormSchema = z.infer<typeof formSchema>
 
+function clearTimer(timerRef: {
+  current: ReturnType<typeof setTimeout> | null
+}) {
+  if (!timerRef.current) return
+  clearTimeout(timerRef.current)
+  timerRef.current = null
+}
+
 export function ContactForm() {
-  const [sendStatus, setSendStatus] = useState<'default' | 'sending' | 'sent'>(
-    'default',
-  )
+  const [sendStatus, setSendStatus] = useState<
+    'default' | 'sending' | 'sent' | 'error'
+  >('default')
+  const statusTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const isMountedRef = useRef(true)
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -51,21 +61,43 @@ export function ContactForm() {
 
   const { errors, dirtyFields, isValidating } = form.formState
 
-  function onValid(values: FormSchema) {
+  useEffect(() => {
+    return () => {
+      isMountedRef.current = false
+      clearTimer(statusTimeoutRef)
+    }
+  }, [])
+
+  function handleSubmitLead(values: FormSchema) {
+    return new Promise<FormSchema>((resolve) => {
+      statusTimeoutRef.current = setTimeout(() => resolve(values), 800)
+    })
+  }
+
+  async function onValid(values: FormSchema) {
+    clearTimer(statusTimeoutRef)
+
     setSendStatus('sending')
-    setTimeout(() => {
+
+    try {
+      await handleSubmitLead(values)
+      if (!isMountedRef.current) return
+
+      form.reset()
       setSendStatus('sent')
-      setTimeout(() => setSendStatus('default'), 3000)
-    }, 2000)
-    console.log(values)
-    alert('Formulário enviado com sucesso!')
-    form.reset()
+      statusTimeoutRef.current = setTimeout(
+        () => setSendStatus('default'),
+        3000,
+      )
+    } catch {
+      if (!isMountedRef.current) return
+      setSendStatus('error')
+    }
   }
 
   function onInvalid(errors: FieldErrors<FormSchema>) {
-    const firstError = Object.keys(errors)[0]
-    const el = document.getElementById(firstError)
-    el?.focus()
+    const [firstError] = Object.keys(errors) as Array<keyof FormSchema>
+    if (firstError) form.setFocus(firstError)
   }
 
   const isFieldValid = (fieldName: keyof FormSchema) => {
@@ -170,7 +202,23 @@ export function ContactForm() {
           {sendStatus === 'default' && 'Enviar Mensagem'}
           {sendStatus === 'sending' && 'Enviando...'}
           {sendStatus === 'sent' && 'Mensagem Enviada!'}
+          {sendStatus === 'error' && 'Tentar novamente'}
         </Button>
+        <p
+          className={cn(
+            'text-center text-sm font-medium transition-opacity',
+            sendStatus === 'sent' && 'text-send opacity-100',
+            sendStatus === 'error' && 'text-red-600 opacity-100',
+            sendStatus !== 'sent' &&
+              sendStatus !== 'error' &&
+              'sr-only opacity-0',
+          )}
+          aria-live="polite"
+          role="status"
+        >
+          {sendStatus === 'sent' && 'Formulário enviado com sucesso.'}
+          {sendStatus === 'error' && 'Não foi possível enviar agora.'}
+        </p>
       </form>
     </Form>
   )

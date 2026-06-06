@@ -31,10 +31,10 @@ function SelectTrigger({
   return (
     <SelectPrimitive.Trigger
       className={cn(
-        'flex h-12 w-full items-center justify-between rounded-md border-2 border-black px-6 py-3 text-base text-black placeholder:text-neutral-500',
-        'data-[state=open]:border-black',
+        'flex h-12 w-full items-center justify-between rounded-md border-2 border-black bg-white px-5 py-3 text-base font-medium text-black shadow-sm placeholder:text-neutral-500',
+        'transition-all duration-200 hover:border-teal-600 hover:shadow-md data-[state=open]:border-teal-700 data-[state=open]:ring-2 data-[state=open]:ring-teal-700/20',
         'disabled:cursor-not-allowed disabled:opacity-50',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black focus-visible:border-ring/30',
+        'focus-visible:border-teal-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-700/30 focus-visible:ring-offset-2',
         className,
       )}
       {...props}
@@ -57,7 +57,7 @@ function SelectContent({
     <SelectPrimitive.Portal>
       <SelectPrimitive.Content
         className={cn(
-          'relative z-50 min-w-[8rem] overflow-hidden rounded-md text-black [backface-visibility:hidden] [transform:translateZ(0)]',
+          'relative z-50 min-w-[8rem] overflow-hidden rounded-md border-2 border-black bg-white text-black shadow-xl [backface-visibility:hidden] [transform:translateZ(0)]',
           'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2',
           position === 'popper' &&
             'data-[side=bottom]:-translate-y-0 data-[side=top]:-translate-y-0',
@@ -70,7 +70,7 @@ function SelectContent({
           className={cn(
             'p-0',
             position === 'popper' &&
-              'h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)]',
+              'w-full min-w-[var(--radix-select-trigger-width)]',
           )}
         >
           {children}
@@ -101,10 +101,9 @@ function SelectItem({
   return (
     <SelectPrimitive.Item
       className={cn(
-        'relative flex w-full cursor-default select-none items-center rounded-sm py-2 pl-8 pr-2 text-base my-0.5 bg-muted',
-        'data-[highlighted]:bg-black data-[highlighted]:text-white',
+        'relative my-1 flex w-full cursor-default select-none items-center rounded-sm bg-white py-2.5 pl-9 pr-3 text-base text-black outline-none',
+        'transition-colors data-[highlighted]:bg-teal-700 data-[highlighted]:text-white data-[state=checked]:bg-teal-50 data-[state=checked]:font-semibold',
         'data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-        'data-[highlighted]:outline-none data-[highlighted]:ring-offset-2 data-[highlighted]:ring-black data-[highlighted]:border-ring/30',
         className,
       )}
       {...props}

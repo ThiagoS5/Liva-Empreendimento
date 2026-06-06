@@ -29,15 +29,30 @@ export function ExpansiveCard({
   features,
 }: ExpansiveCardProps) {
   const [isExpanded, setIsExpanded] = useState(false)
+  const detailsId = `property-${title
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')}`
 
   const toggleExpand = () => {
-    setIsExpanded(!isExpanded)
+    setIsExpanded((current) => !current)
   }
 
   return (
     <Card
-      className="relative h-96 w-full max-w-sm cursor-pointer overflow-hidden rounded-lg shadow-lg group"
+      role="button"
+      tabIndex={0}
+      aria-expanded={isExpanded}
+      aria-controls={detailsId}
+      className="group relative h-96 w-full max-w-sm cursor-pointer overflow-hidden rounded-lg shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-4"
       onClick={toggleExpand}
+      onKeyDown={(event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          toggleExpand()
+        }
+      }}
     >
       <Image
         src={imageUrl}
@@ -53,6 +68,7 @@ export function ExpansiveCard({
         </Badge>
         <h2 className="text-3xl font-bold">{title}</h2>
         <div
+          id={detailsId}
           className={cn(
             'mt-4 space-y-4 transition-all duration-300 ease-in-out',
             isExpanded ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0',
