@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
 } from '@/components/molecules/Carousel'
 import { ContactForm } from '@/components/organisms/ContactForm'
+import { whatsappHref } from '@/components/organisms/siteLinks'
 import Autoplay from 'embla-carousel-autoplay'
 import Fade from 'embla-carousel-fade'
 import Image from 'next/image'
@@ -79,10 +80,13 @@ export default function Home() {
           </div>
         </div>
       </Carousel>
-      <div className="px-4 sm:px-6 lg:px-8">
-        <section id="about" className="container mx-auto py-16 px-4">
-          <div className="flex flex-col items-center md:flex-row md:items-start md:space-x-8">
-            <div className="hidden md:block md:pr-50">
+      <div className="min-h-[100svh] px-4 sm:px-6 lg:px-8">
+        <section
+          id="about"
+          className="container mx-auto flex min-h-[100svh] items-center px-4 py-16 sm:py-20"
+        >
+          <div className="flex w-full flex-col items-center gap-10 md:flex-row md:justify-center md:gap-14 lg:gap-20">
+            <div className="hidden shrink-0 md:block">
               <Image
                 src="/family-icon.png"
                 alt="Family Icon"
@@ -103,8 +107,19 @@ export default function Home() {
                 que abrigam histórias de vida e que são desenvolvidos para que
                 você viva momentos incríveis ao lado da sua família.
               </p>
-              <Button variant="primary" className="self-start px-8 py-3">
-                SAIBA MAIS
+              <Button
+                variant="primary"
+                className="self-start px-8 py-3"
+                asChild
+              >
+                <a
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Saiba mais pelo WhatsApp"
+                >
+                  SAIBA MAIS
+                </a>
               </Button>
             </div>
           </div>
