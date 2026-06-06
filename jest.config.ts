@@ -9,6 +9,16 @@ const config: Config = {
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  modulePathIgnorePatterns: [
+    '<rootDir>/.agents/',
+    '<rootDir>/.next/',
+    '<rootDir>/coverage/',
+  ],
+  testPathIgnorePatterns: [
+    '<rootDir>/.agents/',
+    '<rootDir>/.next/',
+    '<rootDir>/coverage/',
+  ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },

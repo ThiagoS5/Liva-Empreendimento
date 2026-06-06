@@ -31,8 +31,8 @@ export function Header() {
             src="/liva-icon.png"
             alt="Liva empreendimentos"
             width={100}
-            height={43}
-            className="h-10 w-auto cursor-pointer"
+            height={40}
+            className="cursor-pointer"
             priority
           />
         </Link>
@@ -86,9 +86,8 @@ export function Header() {
               src="/liva-icon.png"
               alt="Liva empreendimentos"
               width={100}
-              height={43}
+              height={40}
               priority
-              className="h-10 w-auto"
             />
           </Link>
           <Button variant="ghost" size="icon" onClick={closeMenu}>

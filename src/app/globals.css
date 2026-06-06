@@ -50,7 +50,8 @@
   --ring: oklch(0.708 0 0);
   --floating: oklch(0.7058 0 0);
   --radius: 0.5rem;
-  --send: oklch(64.52% 0.121 171.16);
+  --send: oklch(0.43 0.105 171.16);
+  --send-foreground: oklch(1 0 0);
   --send-success: oklch(77.72% 0.087 176.66);
   --badge: oklch(0.9418 0.0965 125.68);
   --bg-form: oklch(0.162 0.0238 174.68);

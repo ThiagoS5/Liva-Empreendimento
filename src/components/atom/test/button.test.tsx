@@ -90,14 +90,39 @@ describe('Button component', () => {
     expect(handleClick).not.toHaveBeenCalled()
   })
 
-  test('renders as a child component when asChild is true', () => {
+  test('renders as a native button when asChild is omitted', () => {
+    render(<Button>Native button</Button>)
+    const buttonElement = screen.getByRole('button', { name: 'Native button' })
+
+    expect(buttonElement.tagName).toBe('BUTTON')
+  })
+
+  test('renders as a native button when asChild is false', () => {
+    render(<Button asChild={false}>Explicit native button</Button>)
+    const buttonElement = screen.getByRole('button', {
+      name: 'Explicit native button',
+    })
+
+    expect(buttonElement.tagName).toBe('BUTTON')
+  })
+
+  test('forwards styles and interactions when rendered as a child', async () => {
+    const handleClick = jest.fn()
+    const user = userEvent.setup()
+
     render(
-      <Button asChild>
-        <a href="#">Link</a>
+      <Button asChild className="custom-link" onClick={handleClick}>
+        <a href="#test">Link action</a>
       </Button>,
     )
-    const linkElement = screen.getByRole('link', { name: 'Link' })
+    const linkElement = screen.getByRole('link', { name: 'Link action' })
+
     expect(linkElement).toBeInTheDocument()
+    expect(linkElement).toHaveAttribute('href', '#test')
     expect(linkElement).toHaveClass('inline-flex')
+    expect(linkElement).toHaveClass('custom-link')
+
+    await user.click(linkElement)
+    expect(handleClick).toHaveBeenCalledTimes(1)
   })
 })

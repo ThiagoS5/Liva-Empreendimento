@@ -54,7 +54,7 @@ export function PropertyListing() {
       <div className="flex flex-col items-center space-y-6 text-center">
         <h1 className="text-4xl font-light leading-tight lg:text-5xl">
           Confira todos os <br /> empreendimentos{' '}
-          <span className="font-bold text-teal-500">da Liva</span>
+          <span className="font-bold text-teal-700">da Liva</span>
         </h1>
         <Button
           variant={showFilters ? 'primary' : 'filter'}

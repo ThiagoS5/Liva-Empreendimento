@@ -89,7 +89,7 @@ export default function Home() {
             <div className="max-w-md space-y-6 text-left">
               <h1 className="text-4xl font-medium lg:text-5xl">
                 Construimos confiança e <br />
-                <span className="font-bold text-teal-500">
+                <span className="font-bold text-teal-700">
                   realizamos sonhos!
                 </span>
               </h1>

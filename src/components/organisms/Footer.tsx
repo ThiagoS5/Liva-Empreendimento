@@ -24,7 +24,7 @@ export function Footer() {
           </div>
 
           <nav className="space-y-4" aria-label="Navegação do rodapé">
-            <h3 className="mt-3 text-sm font-semibold uppercase tracking-wider text-teal-500 md:mt-0">
+            <h3 className="mt-3 text-sm font-semibold uppercase tracking-wider text-teal-300 md:mt-0">
               Navegue no Site
             </h3>
             <ul className="space-y-2 text-sm">
